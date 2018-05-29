@@ -1,4 +1,7 @@
 module.exports = {
+  session:{
+    KEY: '',
+  },
   mongodb: {
     URI: '',
   },
@@ -9,5 +12,5 @@ module.exports = {
   twitch: {
     CLIENT_ID: '',
     CLIENT_SECRET: '',
-  }
+  },
 };

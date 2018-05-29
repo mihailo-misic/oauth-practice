@@ -1,26 +1,23 @@
 const router = require('express').Router();
-const passport = require('passport');
+const smartPassport = require('../config/passport-setup');
 
 // Auth login
-router.get('/login', (req, res)=>{
-	res.render('login');
+router.get('/login', (req, res) => {
+  res.render('login', { user: req.user });
 });
 
 // Auth logout
-router.get('/logout', (req, res)=>{
-	// handle logout
-	res.send('logging out');
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
 });
 
 // Auth with twitter
-router.get('/twitter', passport.authenticate('twitter', {session:false}));
+router.get('/twitter', smartPassport.authenticate('twitter', { session: false }));
 router.get('/twitter/callback',
-	passport.authenticate('twitter', {
-		successRedirect: '/',
-		failureRedirect: '/auth/login'
-	}),
-	(req, res)=>{
-
-	});
+  smartPassport.authenticate('twitter', {
+    successRedirect: '/profile',
+    failureRedirect: '/auth/login'
+  }));
 
 module.exports = router;
