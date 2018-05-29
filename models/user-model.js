@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   username: String,
   twitterId: String,
+  twitchId: String,
   thumbnail: String,
 });
 
